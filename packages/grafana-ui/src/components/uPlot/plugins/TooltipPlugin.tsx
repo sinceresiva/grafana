@@ -50,8 +50,10 @@ export const TooltipPlugin: React.FC<TooltipPluginProps> = ({
   const [coords, setCoords] = useState<CartesianCoords2D | null>(null);
   const [isActive, setIsActive] = useState<boolean>(false);
   const isMounted = useMountedState();
+  const search = new URLSearchParams(location.search);
 
   const pluginId = `TooltipPlugin`;
+  const isEditPanel = search.has('editPanel');
 
   // Debug logs
   useEffect(() => {
@@ -162,7 +164,7 @@ export const TooltipPlugin: React.FC<TooltipPluginProps> = ({
     };
   }, [config, setCoords, setIsActive, setFocusedPointIdx, setFocusedPointIdxs]);
 
-  if (focusedPointIdx === null || (!isActive && sync === DashboardCursorSync.Crosshair)) {
+  if (focusedPointIdx === null || (!isActive && sync === DashboardCursorSync.Crosshair) || (!isActive && isEditPanel)) {
     return null;
   }
 
