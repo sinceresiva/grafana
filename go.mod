@@ -1,4 +1,4 @@
-module github.com/grafana/grafana
+module github.com/grafana/grafana/v8
 
 go 1.17
 
